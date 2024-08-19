@@ -5,7 +5,7 @@ import Moviecard from './Moviecard'
 import axios from 'axios'
 import Pagination from './Pagination'
 
-function Movies() {
+function Movies({handleAddWatchList, handleRemoveWatchList, watchlist}) {
 
   const [movie, setMovie] = useState([])
   const [pageNo, setPageNo] = useState(1)
@@ -31,14 +31,14 @@ function Movies() {
   }
   
   return (
-    <div className='p-5 bg-black'>
+    <div className='p-5 bg-whitecus'>
         
-        <div className='text-2xl m-5 font-bold font-ubuntu text-center text-whitecus'>Latest Trending Movies</div>
-        {/* <Pagination /> */}
+        {/* <div className='text-2xl m-5 font-bold font-ubuntu text-center text-graycus'>Latest Trending Movies</div> */}
+        <Pagination pagePrev={pagePrev} pageNo={pageNo} pageNext={pageNext}/>
         
         <div className='flex flex-wrap flex-row gap-5 justify-around'>
             {movie.map((movieObj)=>{
-              return <Moviecard poster_path={movieObj.poster_path} name={movieObj.original_title}/>
+              return <Moviecard key={movieObj.id} movieObj={movieObj} poster_path={movieObj.poster_path} name={movieObj.original_title} handleAddWatchList={handleAddWatchList} handleRemoveWatchList={handleRemoveWatchList} watchlist={watchlist}/>
             })}
         </div>
         <Pagination pagePrev={pagePrev} pageNo={pageNo} pageNext={pageNext}/>
